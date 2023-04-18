@@ -1,0 +1,1979 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "title": "Snippets API",
+      "description": "Test description",
+      "termsOfService": "https://www.google.com/policies/terms/",
+      "contact": {
+        "email": "contact@snippets.local"
+      },
+      "license": {
+        "name": "BSD License"
+      },
+      "version": "v1"
+    },
+    "host": "localhost:8000",
+    "schemes": [
+      "http"
+    ],
+    "basePath": "/",
+    "consumes": [
+      "application/json"
+    ],
+    "produces": [
+      "application/json"
+    ],
+    "securityDefinitions": {
+      "api_key": {
+        "type": "apiKey",
+        "name": "Authorization",
+        "in": "header"
+      }
+    },
+    "security": [
+      {
+        "api_key": []
+      }
+    ],
+    "paths": {
+      "/buyer/carts": {
+        "get": {
+          "operationId": "buyer_carts_list",
+          "description": "",
+          "parameters": [
+            {
+              "name": "page",
+              "in": "query",
+              "description": "A page number within the paginated result set.",
+              "required": false,
+              "type": "integer"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "",
+              "schema": {
+                "required": [
+                  "count",
+                  "results"
+                ],
+                "type": "object",
+                "properties": {
+                  "count": {
+                    "type": "integer"
+                  },
+                  "next": {
+                    "type": "string",
+                    "format": "uri",
+                    "x-nullable": true
+                  },
+                  "previous": {
+                    "type": "string",
+                    "format": "uri",
+                    "x-nullable": true
+                  },
+                  "results": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/definitions/Cart"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "tags": [
+            "buyer"
+          ]
+        },
+        "post": {
+          "operationId": "buyer_carts_create",
+          "description": "",
+          "parameters": [
+            {
+              "name": "data",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/Cart"
+              }
+            }
+          ],
+          "responses": {
+            "201": {
+              "description": "",
+              "schema": {
+                "$ref": "#/definitions/Cart"
+              }
+            }
+          },
+          "tags": [
+            "buyer"
+          ]
+        },
+        "parameters": []
+      },
+      "/buyer/carts-submit/{user_address}": {
+        "post": {
+          "operationId": "buyer_carts-submit_create",
+          "description": "",
+          "parameters": [],
+          "responses": {
+            "201": {
+              "description": ""
+            }
+          },
+          "tags": [
+            "buyer"
+          ]
+        },
+        "parameters": [
+          {
+            "name": "user_address",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      },
+      "/buyer/carts/{cart}": {
+        "get": {
+          "operationId": "buyer_carts_read",
+          "description": "",
+          "parameters": [],
+          "responses": {
+            "200": {
+              "description": "",
+              "schema": {
+                "$ref": "#/definitions/Cart"
+              }
+            }
+          },
+          "tags": [
+            "buyer"
+          ]
+        },
+        "put": {
+          "operationId": "buyer_carts_update",
+          "description": "",
+          "parameters": [
+            {
+              "name": "data",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/Cart"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "",
+              "schema": {
+                "$ref": "#/definitions/Cart"
+              }
+            }
+          },
+          "tags": [
+            "buyer"
+          ]
+        },
+        "patch": {
+          "operationId": "buyer_carts_partial_update",
+          "description": "",
+          "parameters": [
+            {
+              "name": "data",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/Cart"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "",
+              "schema": {
+                "$ref": "#/definitions/Cart"
+              }
+            }
+          },
+          "tags": [
+            "buyer"
+          ]
+        },
+        "delete": {
+          "operationId": "buyer_carts_delete",
+          "description": "",
+          "parameters": [],
+          "responses": {
+            "204": {
+              "description": ""
+            }
+          },
+          "tags": [
+            "buyer"
+          ]
+        },
+        "parameters": [
+          {
+            "name": "cart",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      },
+      "/buyer/orders": {
+        "get": {
+          "operationId": "buyer_orders_list",
+          "description": "",
+          "parameters": [
+            {
+              "name": "page",
+              "in": "query",
+              "description": "A page number within the paginated result set.",
+              "required": false,
+              "type": "integer"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "",
+              "schema": {
+                "required": [
+                  "count",
+                  "results"
+                ],
+                "type": "object",
+                "properties": {
+                  "count": {
+                    "type": "integer"
+                  },
+                  "next": {
+                    "type": "string",
+                    "format": "uri",
+                    "x-nullable": true
+                  },
+                  "previous": {
+                    "type": "string",
+                    "format": "uri",
+                    "x-nullable": true
+                  },
+                  "results": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/definitions/Order"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "tags": [
+            "buyer"
+          ]
+        },
+        "parameters": []
+      },
+      "/buyer/orders/{order}": {
+        "get": {
+          "operationId": "buyer_orders_read",
+          "description": "",
+          "parameters": [],
+          "responses": {
+            "200": {
+              "description": "",
+              "schema": {
+                "$ref": "#/definitions/Order"
+              }
+            }
+          },
+          "tags": [
+            "buyer"
+          ]
+        },
+        "parameters": [
+          {
+            "name": "order",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      },
+      "/buyer/orders/{order}/order-details": {
+        "get": {
+          "operationId": "buyer_orders_order-details_list",
+          "description": "",
+          "parameters": [
+            {
+              "name": "page",
+              "in": "query",
+              "description": "A page number within the paginated result set.",
+              "required": false,
+              "type": "integer"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "",
+              "schema": {
+                "required": [
+                  "count",
+                  "results"
+                ],
+                "type": "object",
+                "properties": {
+                  "count": {
+                    "type": "integer"
+                  },
+                  "next": {
+                    "type": "string",
+                    "format": "uri",
+                    "x-nullable": true
+                  },
+                  "previous": {
+                    "type": "string",
+                    "format": "uri",
+                    "x-nullable": true
+                  },
+                  "results": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/definitions/OrderDetail"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "tags": [
+            "buyer"
+          ]
+        },
+        "parameters": [
+          {
+            "name": "order",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      },
+      "/buyer/orders/{order}/order-details/{order_detail}": {
+        "get": {
+          "operationId": "buyer_orders_order-details_read",
+          "description": "",
+          "parameters": [],
+          "responses": {
+            "200": {
+              "description": "",
+              "schema": {
+                "$ref": "#/definitions/OrderDetail"
+              }
+            }
+          },
+          "tags": [
+            "buyer"
+          ]
+        },
+        "parameters": [
+          {
+            "name": "order",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "order_detail",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      },
+      "/buyer/show-books": {
+        "get": {
+          "operationId": "buyer_show-books_list",
+          "description": "",
+          "parameters": [
+            {
+              "name": "page",
+              "in": "query",
+              "description": "A page number within the paginated result set.",
+              "required": false,
+              "type": "integer"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "",
+              "schema": {
+                "required": [
+                  "count",
+                  "results"
+                ],
+                "type": "object",
+                "properties": {
+                  "count": {
+                    "type": "integer"
+                  },
+                  "next": {
+                    "type": "string",
+                    "format": "uri",
+                    "x-nullable": true
+                  },
+                  "previous": {
+                    "type": "string",
+                    "format": "uri",
+                    "x-nullable": true
+                  },
+                  "results": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/definitions/Book"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "tags": [
+            "buyer"
+          ]
+        },
+        "parameters": []
+      },
+      "/buyer/user-address": {
+        "get": {
+          "operationId": "buyer_user-address_list",
+          "description": "",
+          "parameters": [
+            {
+              "name": "page",
+              "in": "query",
+              "description": "A page number within the paginated result set.",
+              "required": false,
+              "type": "integer"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "",
+              "schema": {
+                "required": [
+                  "count",
+                  "results"
+                ],
+                "type": "object",
+                "properties": {
+                  "count": {
+                    "type": "integer"
+                  },
+                  "next": {
+                    "type": "string",
+                    "format": "uri",
+                    "x-nullable": true
+                  },
+                  "previous": {
+                    "type": "string",
+                    "format": "uri",
+                    "x-nullable": true
+                  },
+                  "results": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/definitions/UserAddress"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "tags": [
+            "buyer"
+          ]
+        },
+        "post": {
+          "operationId": "buyer_user-address_create",
+          "description": "",
+          "parameters": [
+            {
+              "name": "data",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/UserAddress"
+              }
+            }
+          ],
+          "responses": {
+            "201": {
+              "description": "",
+              "schema": {
+                "$ref": "#/definitions/UserAddress"
+              }
+            }
+          },
+          "tags": [
+            "buyer"
+          ]
+        },
+        "parameters": []
+      },
+      "/buyer/user-address/{user_address}": {
+        "get": {
+          "operationId": "buyer_user-address_read",
+          "description": "",
+          "parameters": [],
+          "responses": {
+            "200": {
+              "description": "",
+              "schema": {
+                "$ref": "#/definitions/UserAddress"
+              }
+            }
+          },
+          "tags": [
+            "buyer"
+          ]
+        },
+        "put": {
+          "operationId": "buyer_user-address_update",
+          "description": "",
+          "parameters": [
+            {
+              "name": "data",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/UserAddress"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "",
+              "schema": {
+                "$ref": "#/definitions/UserAddress"
+              }
+            }
+          },
+          "tags": [
+            "buyer"
+          ]
+        },
+        "patch": {
+          "operationId": "buyer_user-address_partial_update",
+          "description": "",
+          "parameters": [
+            {
+              "name": "data",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/UserAddress"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "",
+              "schema": {
+                "$ref": "#/definitions/UserAddress"
+              }
+            }
+          },
+          "tags": [
+            "buyer"
+          ]
+        },
+        "delete": {
+          "operationId": "buyer_user-address_delete",
+          "description": "",
+          "parameters": [],
+          "responses": {
+            "204": {
+              "description": ""
+            }
+          },
+          "tags": [
+            "buyer"
+          ]
+        },
+        "parameters": [
+          {
+            "name": "user_address",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      },
+      "/publisher/books": {
+        "get": {
+          "operationId": "publisher_books_list",
+          "description": "",
+          "parameters": [
+            {
+              "name": "page",
+              "in": "query",
+              "description": "A page number within the paginated result set.",
+              "required": false,
+              "type": "integer"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "",
+              "schema": {
+                "required": [
+                  "count",
+                  "results"
+                ],
+                "type": "object",
+                "properties": {
+                  "count": {
+                    "type": "integer"
+                  },
+                  "next": {
+                    "type": "string",
+                    "format": "uri",
+                    "x-nullable": true
+                  },
+                  "previous": {
+                    "type": "string",
+                    "format": "uri",
+                    "x-nullable": true
+                  },
+                  "results": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/definitions/Book"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "tags": [
+            "publisher"
+          ]
+        },
+        "post": {
+          "operationId": "publisher_books_create",
+          "description": "",
+          "parameters": [
+            {
+              "name": "data",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/Book"
+              }
+            }
+          ],
+          "responses": {
+            "201": {
+              "description": "",
+              "schema": {
+                "$ref": "#/definitions/Book"
+              }
+            }
+          },
+          "tags": [
+            "publisher"
+          ]
+        },
+        "parameters": []
+      },
+      "/publisher/books/{book}": {
+        "get": {
+          "operationId": "publisher_books_read",
+          "description": "",
+          "parameters": [],
+          "responses": {
+            "200": {
+              "description": "",
+              "schema": {
+                "$ref": "#/definitions/Book"
+              }
+            }
+          },
+          "tags": [
+            "publisher"
+          ]
+        },
+        "put": {
+          "operationId": "publisher_books_update",
+          "description": "",
+          "parameters": [
+            {
+              "name": "data",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/Book"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "",
+              "schema": {
+                "$ref": "#/definitions/Book"
+              }
+            }
+          },
+          "tags": [
+            "publisher"
+          ]
+        },
+        "patch": {
+          "operationId": "publisher_books_partial_update",
+          "description": "",
+          "parameters": [
+            {
+              "name": "data",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/Book"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "",
+              "schema": {
+                "$ref": "#/definitions/Book"
+              }
+            }
+          },
+          "tags": [
+            "publisher"
+          ]
+        },
+        "delete": {
+          "operationId": "publisher_books_delete",
+          "description": "",
+          "parameters": [],
+          "responses": {
+            "204": {
+              "description": ""
+            }
+          },
+          "tags": [
+            "publisher"
+          ]
+        },
+        "parameters": [
+          {
+            "name": "book",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      },
+      "/publisher/paper-book-orders": {
+        "get": {
+          "operationId": "publisher_paper-book-orders_list",
+          "description": "",
+          "parameters": [
+            {
+              "name": "page",
+              "in": "query",
+              "description": "A page number within the paginated result set.",
+              "required": false,
+              "type": "integer"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "",
+              "schema": {
+                "required": [
+                  "count",
+                  "results"
+                ],
+                "type": "object",
+                "properties": {
+                  "count": {
+                    "type": "integer"
+                  },
+                  "next": {
+                    "type": "string",
+                    "format": "uri",
+                    "x-nullable": true
+                  },
+                  "previous": {
+                    "type": "string",
+                    "format": "uri",
+                    "x-nullable": true
+                  },
+                  "results": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/definitions/PaperBookOrder"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "tags": [
+            "publisher"
+          ]
+        },
+        "parameters": []
+      },
+      "/publisher/paper-book-orders/handover-list": {
+        "get": {
+          "operationId": "publisher_paper-book-orders_handover-list_list",
+          "description": "",
+          "parameters": [
+            {
+              "name": "page",
+              "in": "query",
+              "description": "A page number within the paginated result set.",
+              "required": false,
+              "type": "integer"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "",
+              "schema": {
+                "required": [
+                  "count",
+                  "results"
+                ],
+                "type": "object",
+                "properties": {
+                  "count": {
+                    "type": "integer"
+                  },
+                  "next": {
+                    "type": "string",
+                    "format": "uri",
+                    "x-nullable": true
+                  },
+                  "previous": {
+                    "type": "string",
+                    "format": "uri",
+                    "x-nullable": true
+                  },
+                  "results": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/definitions/PaperBookOrder"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "tags": [
+            "publisher"
+          ]
+        },
+        "parameters": []
+      },
+      "/publisher/paper-book-orders/{paper_book_order}": {
+        "get": {
+          "operationId": "publisher_paper-book-orders_read",
+          "description": "",
+          "parameters": [],
+          "responses": {
+            "200": {
+              "description": "",
+              "schema": {
+                "$ref": "#/definitions/PaperBookOrder"
+              }
+            }
+          },
+          "tags": [
+            "publisher"
+          ]
+        },
+        "put": {
+          "operationId": "publisher_paper-book-orders_update",
+          "description": "",
+          "parameters": [
+            {
+              "name": "data",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/PaperBookOrder"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "",
+              "schema": {
+                "$ref": "#/definitions/PaperBookOrder"
+              }
+            }
+          },
+          "tags": [
+            "publisher"
+          ]
+        },
+        "patch": {
+          "operationId": "publisher_paper-book-orders_partial_update",
+          "description": "",
+          "parameters": [
+            {
+              "name": "data",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/PaperBookOrder"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "",
+              "schema": {
+                "$ref": "#/definitions/PaperBookOrder"
+              }
+            }
+          },
+          "tags": [
+            "publisher"
+          ]
+        },
+        "parameters": [
+          {
+            "name": "paper_book_order",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      },
+      "/publisher/paper-book-orders/{paper_book_order}/dispatch": {
+        "post": {
+          "operationId": "publisher_paper-book-orders_dispatch_create",
+          "description": "",
+          "parameters": [],
+          "responses": {
+            "201": {
+              "description": ""
+            }
+          },
+          "tags": [
+            "publisher"
+          ]
+        },
+        "parameters": [
+          {
+            "name": "paper_book_order",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      },
+      "/publisher/paper-book-orders/{paper_book_order}/handover-to-transport": {
+        "post": {
+          "operationId": "publisher_paper-book-orders_handover-to-transport_create",
+          "description": "",
+          "parameters": [],
+          "responses": {
+            "201": {
+              "description": ""
+            }
+          },
+          "tags": [
+            "publisher"
+          ]
+        },
+        "parameters": [
+          {
+            "name": "paper_book_order",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      },
+      "/transporter/paper-book-orders": {
+        "get": {
+          "operationId": "transporter_paper-book-orders_list",
+          "description": "",
+          "parameters": [
+            {
+              "name": "page",
+              "in": "query",
+              "description": "A page number within the paginated result set.",
+              "required": false,
+              "type": "integer"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "",
+              "schema": {
+                "required": [
+                  "count",
+                  "results"
+                ],
+                "type": "object",
+                "properties": {
+                  "count": {
+                    "type": "integer"
+                  },
+                  "next": {
+                    "type": "string",
+                    "format": "uri",
+                    "x-nullable": true
+                  },
+                  "previous": {
+                    "type": "string",
+                    "format": "uri",
+                    "x-nullable": true
+                  },
+                  "results": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/definitions/PaperBookOrder"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "tags": [
+            "transporter"
+          ]
+        },
+        "post": {
+          "operationId": "transporter_paper-book-orders_create",
+          "description": "",
+          "parameters": [
+            {
+              "name": "data",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/PaperBookOrder"
+              }
+            }
+          ],
+          "responses": {
+            "201": {
+              "description": "",
+              "schema": {
+                "$ref": "#/definitions/PaperBookOrder"
+              }
+            }
+          },
+          "tags": [
+            "transporter"
+          ]
+        },
+        "parameters": []
+      },
+      "/transporter/paper-book-orders/delivered-list": {
+        "get": {
+          "operationId": "transporter_paper-book-orders_delivered-list_list",
+          "description": "",
+          "parameters": [
+            {
+              "name": "page",
+              "in": "query",
+              "description": "A page number within the paginated result set.",
+              "required": false,
+              "type": "integer"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "",
+              "schema": {
+                "required": [
+                  "count",
+                  "results"
+                ],
+                "type": "object",
+                "properties": {
+                  "count": {
+                    "type": "integer"
+                  },
+                  "next": {
+                    "type": "string",
+                    "format": "uri",
+                    "x-nullable": true
+                  },
+                  "previous": {
+                    "type": "string",
+                    "format": "uri",
+                    "x-nullable": true
+                  },
+                  "results": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/definitions/PaperBookOrder"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "tags": [
+            "transporter"
+          ]
+        },
+        "parameters": []
+      },
+      "/transporter/paper-book-orders/{paper_book_order}": {
+        "get": {
+          "operationId": "transporter_paper-book-orders_read",
+          "description": "",
+          "parameters": [],
+          "responses": {
+            "200": {
+              "description": "",
+              "schema": {
+                "$ref": "#/definitions/PaperBookOrder"
+              }
+            }
+          },
+          "tags": [
+            "transporter"
+          ]
+        },
+        "put": {
+          "operationId": "transporter_paper-book-orders_update",
+          "description": "",
+          "parameters": [
+            {
+              "name": "data",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/PaperBookOrder"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "",
+              "schema": {
+                "$ref": "#/definitions/PaperBookOrder"
+              }
+            }
+          },
+          "tags": [
+            "transporter"
+          ]
+        },
+        "patch": {
+          "operationId": "transporter_paper-book-orders_partial_update",
+          "description": "",
+          "parameters": [
+            {
+              "name": "data",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/PaperBookOrder"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "",
+              "schema": {
+                "$ref": "#/definitions/PaperBookOrder"
+              }
+            }
+          },
+          "tags": [
+            "transporter"
+          ]
+        },
+        "delete": {
+          "operationId": "transporter_paper-book-orders_delete",
+          "description": "",
+          "parameters": [],
+          "responses": {
+            "204": {
+              "description": ""
+            }
+          },
+          "tags": [
+            "transporter"
+          ]
+        },
+        "parameters": [
+          {
+            "name": "paper_book_order",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      },
+      "/transporter/paper-book-orders/{paper_book_order}/paper-book-order-tracks": {
+        "get": {
+          "operationId": "transporter_paper-book-orders_paper-book-order-tracks_list",
+          "description": "",
+          "parameters": [
+            {
+              "name": "page",
+              "in": "query",
+              "description": "A page number within the paginated result set.",
+              "required": false,
+              "type": "integer"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "",
+              "schema": {
+                "required": [
+                  "count",
+                  "results"
+                ],
+                "type": "object",
+                "properties": {
+                  "count": {
+                    "type": "integer"
+                  },
+                  "next": {
+                    "type": "string",
+                    "format": "uri",
+                    "x-nullable": true
+                  },
+                  "previous": {
+                    "type": "string",
+                    "format": "uri",
+                    "x-nullable": true
+                  },
+                  "results": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/definitions/PaperBookOrderTrack"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "tags": [
+            "transporter"
+          ]
+        },
+        "post": {
+          "operationId": "transporter_paper-book-orders_paper-book-order-tracks_create",
+          "description": "",
+          "parameters": [
+            {
+              "name": "data",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/PaperBookOrderTrack"
+              }
+            }
+          ],
+          "responses": {
+            "201": {
+              "description": "",
+              "schema": {
+                "$ref": "#/definitions/PaperBookOrderTrack"
+              }
+            }
+          },
+          "tags": [
+            "transporter"
+          ]
+        },
+        "parameters": [
+          {
+            "name": "paper_book_order",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      },
+      "/transporter/paper-book-orders/{paper_book_order}/paper-book-order-tracks/{paper_book_order_track}": {
+        "get": {
+          "operationId": "transporter_paper-book-orders_paper-book-order-tracks_read",
+          "description": "",
+          "parameters": [],
+          "responses": {
+            "200": {
+              "description": "",
+              "schema": {
+                "$ref": "#/definitions/PaperBookOrderTrack"
+              }
+            }
+          },
+          "tags": [
+            "transporter"
+          ]
+        },
+        "put": {
+          "operationId": "transporter_paper-book-orders_paper-book-order-tracks_update",
+          "description": "",
+          "parameters": [
+            {
+              "name": "data",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/PaperBookOrderTrack"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "",
+              "schema": {
+                "$ref": "#/definitions/PaperBookOrderTrack"
+              }
+            }
+          },
+          "tags": [
+            "transporter"
+          ]
+        },
+        "patch": {
+          "operationId": "transporter_paper-book-orders_paper-book-order-tracks_partial_update",
+          "description": "",
+          "parameters": [
+            {
+              "name": "data",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/PaperBookOrderTrack"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "",
+              "schema": {
+                "$ref": "#/definitions/PaperBookOrderTrack"
+              }
+            }
+          },
+          "tags": [
+            "transporter"
+          ]
+        },
+        "delete": {
+          "operationId": "transporter_paper-book-orders_paper-book-order-tracks_delete",
+          "description": "",
+          "parameters": [],
+          "responses": {
+            "204": {
+              "description": ""
+            }
+          },
+          "tags": [
+            "transporter"
+          ]
+        },
+        "parameters": [
+          {
+            "name": "paper_book_order",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "paper_book_order_track",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      },
+      "/users": {
+        "get": {
+          "operationId": "users_list",
+          "description": "",
+          "parameters": [
+            {
+              "name": "page",
+              "in": "query",
+              "description": "A page number within the paginated result set.",
+              "required": false,
+              "type": "integer"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "",
+              "schema": {
+                "required": [
+                  "count",
+                  "results"
+                ],
+                "type": "object",
+                "properties": {
+                  "count": {
+                    "type": "integer"
+                  },
+                  "next": {
+                    "type": "string",
+                    "format": "uri",
+                    "x-nullable": true
+                  },
+                  "previous": {
+                    "type": "string",
+                    "format": "uri",
+                    "x-nullable": true
+                  },
+                  "results": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/definitions/User"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "tags": [
+            "users"
+          ]
+        },
+        "post": {
+          "operationId": "users_create",
+          "description": "",
+          "parameters": [
+            {
+              "name": "data",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/User"
+              }
+            }
+          ],
+          "responses": {
+            "201": {
+              "description": "",
+              "schema": {
+                "$ref": "#/definitions/User"
+              }
+            }
+          },
+          "tags": [
+            "users"
+          ]
+        },
+        "parameters": []
+      },
+      "/users/{user}": {
+        "get": {
+          "operationId": "users_read",
+          "description": "",
+          "parameters": [],
+          "responses": {
+            "200": {
+              "description": "",
+              "schema": {
+                "$ref": "#/definitions/User"
+              }
+            }
+          },
+          "tags": [
+            "users"
+          ]
+        },
+        "put": {
+          "operationId": "users_update",
+          "description": "",
+          "parameters": [
+            {
+              "name": "data",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/User"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "",
+              "schema": {
+                "$ref": "#/definitions/User"
+              }
+            }
+          },
+          "tags": [
+            "users"
+          ]
+        },
+        "delete": {
+          "operationId": "users_delete",
+          "description": "",
+          "parameters": [],
+          "responses": {
+            "204": {
+              "description": ""
+            }
+          },
+          "tags": [
+            "users"
+          ]
+        },
+        "parameters": [
+          {
+            "name": "user",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "definitions": {
+      "Cart": {
+        "required": [
+          "book_type",
+          "book"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "title": "Id",
+            "type": "integer",
+            "readOnly": true
+          },
+          "created_at": {
+            "title": "Created at",
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          },
+          "modified_at": {
+            "title": "Modified at",
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          },
+          "book_type": {
+            "title": "Book type",
+            "type": "string",
+            "enum": [
+              "ebook",
+              "paper"
+            ]
+          },
+          "user": {
+            "title": "User",
+            "type": "integer",
+            "x-nullable": true
+          },
+          "book": {
+            "title": "Book",
+            "type": "integer"
+          }
+        }
+      },
+      "Order": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "title": "Id",
+            "type": "integer",
+            "readOnly": true
+          },
+          "extra_order_details": {
+            "title": "Extra order details",
+            "type": "string",
+            "readOnly": true
+          },
+          "created_at": {
+            "title": "Created at",
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          },
+          "modified_at": {
+            "title": "Modified at",
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          },
+          "user": {
+            "title": "User",
+            "type": "integer",
+            "x-nullable": true
+          }
+        }
+      },
+      "OrderDetail": {
+        "required": [
+          "book_type",
+          "order",
+          "book"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "title": "Id",
+            "type": "integer",
+            "readOnly": true
+          },
+          "extra_track_details": {
+            "title": "Extra track details",
+            "type": "string",
+            "readOnly": true
+          },
+          "book_type": {
+            "title": "Book type",
+            "type": "string",
+            "enum": [
+              "ebook",
+              "paper"
+            ]
+          },
+          "rate": {
+            "title": "Rate",
+            "type": "integer"
+          },
+          "is_cancelled": {
+            "title": "Is cancelled",
+            "type": "boolean"
+          },
+          "cancelled_reason": {
+            "title": "Cancelled reason",
+            "type": "string",
+            "x-nullable": true
+          },
+          "cancelled_at": {
+            "title": "Cancelled at",
+            "type": "string",
+            "format": "date-time",
+            "x-nullable": true
+          },
+          "order": {
+            "title": "Order",
+            "type": "integer"
+          },
+          "book": {
+            "title": "Book",
+            "type": "integer"
+          }
+        }
+      },
+      "Book": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "title": "Id",
+            "type": "integer",
+            "readOnly": true
+          },
+          "name": {
+            "title": "Name",
+            "type": "string",
+            "maxLength": 200,
+            "x-nullable": true
+          },
+          "created_at": {
+            "title": "Created at",
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          },
+          "modified_at": {
+            "title": "Modified at",
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          },
+          "ebook_rate": {
+            "title": "Ebook rate",
+            "type": "integer"
+          },
+          "paperbook_rate": {
+            "title": "Paperbook rate",
+            "type": "integer"
+          },
+          "publisher": {
+            "title": "Publisher",
+            "type": "integer"
+          }
+        }
+      },
+      "UserAddress": {
+        "required": [
+          "user"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "title": "Id",
+            "type": "integer",
+            "readOnly": true
+          },
+          "address_line1": {
+            "title": "Address line1",
+            "type": "string",
+            "x-nullable": true
+          },
+          "address_line2": {
+            "title": "Address line2",
+            "type": "string",
+            "x-nullable": true
+          },
+          "address_line3": {
+            "title": "Address line3",
+            "type": "string",
+            "x-nullable": true
+          },
+          "user": {
+            "title": "User",
+            "type": "integer"
+          }
+        }
+      },
+      "PaperBookOrder": {
+        "required": [
+          "order_detail",
+          "publisher",
+          "user_address",
+          "transporter"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "title": "Id",
+            "type": "integer",
+            "readOnly": true
+          },
+          "extra_paper_book_order_transport": {
+            "title": "Extra paper book order transport",
+            "type": "string",
+            "readOnly": true
+          },
+          "extra_user_address": {
+            "title": "Extra user address",
+            "type": "string",
+            "readOnly": true
+          },
+          "is_dispatched": {
+            "title": "Is dispatched",
+            "type": "boolean"
+          },
+          "dispatched_at": {
+            "title": "Dispatched at",
+            "type": "string",
+            "format": "date-time",
+            "x-nullable": true
+          },
+          "is_handover_to_transporter": {
+            "title": "Is handover to transporter",
+            "type": "boolean"
+          },
+          "handover_to_transporter_at": {
+            "title": "Handover to transporter at",
+            "type": "string",
+            "format": "date-time",
+            "x-nullable": true
+          },
+          "is_delivered": {
+            "title": "Is delivered",
+            "type": "boolean"
+          },
+          "delivered_at": {
+            "title": "Delivered at",
+            "type": "string",
+            "format": "date-time",
+            "x-nullable": true
+          },
+          "order_detail": {
+            "title": "Order detail",
+            "type": "integer"
+          },
+          "publisher": {
+            "title": "Publisher",
+            "type": "integer"
+          },
+          "user_address": {
+            "title": "User address",
+            "type": "integer"
+          },
+          "transporter": {
+            "title": "Transporter",
+            "type": "integer"
+          }
+        }
+      },
+      "PaperBookOrderTrack": {
+        "required": [
+          "tracker",
+          "notes",
+          "paper_book_order"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "title": "Id",
+            "type": "integer",
+            "readOnly": true
+          },
+          "tracker": {
+            "title": "Tracker",
+            "type": "string",
+            "enum": [
+              "cancelled",
+              "preparing",
+              "dispatched",
+              "handover",
+              "moving",
+              "delivered",
+              "outofdelivery"
+            ]
+          },
+          "notes": {
+            "title": "Notes",
+            "type": "string",
+            "minLength": 1
+          },
+          "created_at": {
+            "title": "Created at",
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          },
+          "modified_at": {
+            "title": "Modified at",
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          },
+          "paper_book_order": {
+            "title": "Paper book order",
+            "type": "integer"
+          }
+        }
+      },
+      "User": {
+        "required": [
+          "password",
+          "email"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "title": "ID",
+            "type": "integer",
+            "readOnly": true
+          },
+          "password": {
+            "title": "Password",
+            "type": "string",
+            "maxLength": 128,
+            "minLength": 1
+          },
+          "last_login": {
+            "title": "Last login",
+            "type": "string",
+            "format": "date-time",
+            "x-nullable": true
+          },
+          "email": {
+            "title": "Email address",
+            "type": "string",
+            "format": "email",
+            "maxLength": 254,
+            "minLength": 1
+          },
+          "first_name": {
+            "title": "First name",
+            "type": "string",
+            "maxLength": 30
+          },
+          "last_name": {
+            "title": "Last name",
+            "type": "string",
+            "maxLength": 30
+          },
+          "date_joined": {
+            "title": "Date joined",
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          },
+          "is_active": {
+            "title": "Active",
+            "type": "boolean"
+          },
+          "avatar": {
+            "title": "Avatar",
+            "type": "string",
+            "readOnly": true,
+            "x-nullable": true,
+            "format": "uri"
+          },
+          "is_superuser": {
+            "title": "Superuser",
+            "type": "boolean"
+          },
+          "is_staff": {
+            "title": "Staff",
+            "type": "boolean"
+          },
+          "is_publisher": {
+            "title": "Publisher",
+            "type": "boolean"
+          },
+          "is_buyer": {
+            "title": "Buyer",
+            "type": "boolean"
+          },
+          "is_transporter": {
+            "title": "Transporter",
+            "type": "boolean"
+          },
+          "publisher": {
+            "title": "Publisher",
+            "type": "integer",
+            "x-nullable": true
+          },
+          "transporter": {
+            "title": "Transporter",
+            "type": "integer",
+            "x-nullable": true
+          },
+          "groups": {
+            "description": "The groups this user belongs to. A user will get all permissions granted to each of their groups.",
+            "type": "array",
+            "items": {
+              "description": "The groups this user belongs to. A user will get all permissions granted to each of their groups.",
+              "type": "integer"
+            },
+            "uniqueItems": true
+          },
+          "user_permissions": {
+            "description": "Specific permissions for this user.",
+            "type": "array",
+            "items": {
+              "description": "Specific permissions for this user.",
+              "type": "integer"
+            },
+            "uniqueItems": true
+          }
+        }
+      }
+    }
+  }
